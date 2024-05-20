@@ -8,11 +8,12 @@
 
 class Exception : public std::exception {
   public:
-    Exception(std::string message, const int line_num, std::string file_name);
+    Exception(std::string message, const int line_num, std::string file_name) 
+      : m_message(message), m_fileName(file_name), m_lineNum(line_num)  {};
 
-    const char* what() const noexcept override;
-    const char* file() const noexcept;
-    int line() const noexcept;
+    const char* what() const noexcept override { return m_message.data(); };
+    const char* file() const noexcept { return m_fileName.data(); };
+    int line() const noexcept { return m_lineNum; };
 
   private:
     const std::string m_message;
